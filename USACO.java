@@ -44,7 +44,7 @@ public class USACO{
 
   public static void main(String[] args) {
     try {
-      bronze("makelake.1.in");
+      bronze("makeLakef.in");
     }catch (FileNotFoundException e) {
       System.out.println("enter a file known");
     }
