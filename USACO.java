@@ -12,11 +12,31 @@ public class USACO{
       for (int c = 0; c < grid[0].length; c++) {
         grid[r][c] = Integer.parseInt(row[c]);
       }
-      int rowNum = r + 1;
-      System.out.print("row " + rowNum + ": " + Arrays.toString(grid[r]) + "\n");
+      //int rowNum = r + 1;
+      //System.out.print("row " + rowNum + ": " + Arrays.toString(grid[r]) + "\n");
     }
-    //System.out.println(Arrays.toString(grid));
+    for (int i = 0; i < Integer.parseInt(lvls[3]) + 1; i++) { //aka N stomp instructions
+      String[] cInp = inf.nextLine().split(); //take every input
+      stomp(Integer.parseInt(cInp[0]), Integer.parseInt(cInp[1]), Integer.parseInt(cInp[2])); //stomp that current section...
+    }
+    System.out.println(checkSea(grid, Integer.parseInt(lvl[2]))); //lvl[2] is E
     return -1;
+  }
+
+  private String checkSea(int[][] g, int E) {
+    String out = "";
+    for (int i = 0; i < g.length; i++) {
+      for (int j = 0; j < g[0].length; j++) {
+        if (g[i][j] >= E) out += ".." + " ";
+        else out += Math.abs(E - g[i][j]) + " ";
+      }
+      out += '\n'
+    }
+    return out;
+  }
+  private void stomp(int r, int c, int ele) {
+
+
   }
   public static int silver(String fileName) {
     return -1;
