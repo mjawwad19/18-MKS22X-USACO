@@ -15,26 +15,26 @@ public class USACO{
       //int rowNum = r + 1;
       //System.out.print("row " + rowNum + ": " + Arrays.toString(grid[r]) + "\n");
     }
-    for (int i = 0; i < Integer.parseInt(lvls[3]) + 1; i++) { //aka N stomp instructions
-      String[] cInp = inf.nextLine().split(); //take every input
+    for (int i = 0; i < Integer.parseInt(lvls[3]); i++) { //aka N stomp instructions
+      String[] cInp = inf.nextLine().split(" "); //take every input
       stomp(Integer.parseInt(cInp[0]), Integer.parseInt(cInp[1]), Integer.parseInt(cInp[2])); //stomp that current section...
     }
-    System.out.println(checkSea(grid, Integer.parseInt(lvl[2]))); //lvl[2] is E
+    System.out.println(checkSea(grid, Integer.parseInt(lvls[2]))); //lvl[2] is E
     return -1;
   }
 
-  private String checkSea(int[][] g, int E) {
+  private static String checkSea(int[][] g, int E) {
     String out = "";
     for (int i = 0; i < g.length; i++) {
       for (int j = 0; j < g[0].length; j++) {
         if (g[i][j] >= E) out += ".." + " ";
-        else out += Math.abs(E - g[i][j]) + " ";
+        else out += " " + Math.abs(E - g[i][j]) + " ";
       }
-      out += '\n'
+      out += '\n';
     }
     return out;
   }
-  private void stomp(int r, int c, int ele) {
+  private static void stomp(int r, int c, int ele) {
 
 
   }
