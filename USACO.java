@@ -89,19 +89,28 @@ public class USACO{
     int R = Integer.parseInt(l[0]);
     int C = Integer.parseInt(l[1]);
     int T = Integer.parseInt(l[2]);
-    String[][] land = new String[R][C];
+    int[][] land = new int[R][C];
     //convert inputted grid to a string[][] array to be used
     for (int r = 0; r < R; r++) {
       String[] row = inf.nextLine().split("");
       for (int c = 0; c < C; c++) {
-        land[r][c] = row[c];
+        System.out.println(Arrays.toString(row));
+        if (row[c].equals(".")) land[r][c] = 0;
+        else land[r][c] = -1;
       }
     }
     System.out.println(sPrint(land));
+    String[] iP = inf.nextLine().split(" "); //the locations!
+    int R1 = Integer.parseInt(iP[0]);
+    int C1 = Integer.parseInt(iP[1]);
+    int R2 = Integer.parseInt(iP[2]);
+    int C2 = Integer.parseInt(iP[2]);
+    int[] moves = {1, 0, 0, 1, -1, 0, 0, -1}; //up right down left
+    int[][] possMoves;
     return -1;
   }
 
-  private static String sPrint(String[][] l) {
+  private static String sPrint(int[][] l) {
     String out = "";
     for (int r = 0; r < l.length; r++) {
       for (int c = 0; c < l[0].length; c++) {
