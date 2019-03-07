@@ -11,6 +11,8 @@ public class USACO{
     int N = Integer.parseInt(lvls[3]);
     int[][] grid = new int[R][C];
     //the first two terms listed are R and C anyway so.
+
+    //fill in the grid
     for (int r = 0; r < R; r++) {
       String[] row = inf.nextLine().split(" ");
       for (int c = 0; c < C; c++) {
@@ -18,17 +20,20 @@ public class USACO{
       }
     }
 
+    //stomp N times
     for (int i = 0; i < N; i++) { //aka N stomp instructions
       String[] cInp = inf.nextLine().split(" "); //take every input
       stomp(Integer.parseInt(cInp[0]), Integer.parseInt(cInp[1]), Integer.parseInt(cInp[2]), grid); //stomp that current section...
-      System.out.println(showPass(grid));
+      //System.out.println(showPass(grid));
     }
-    System.out.println(checkSea(grid, SL));
+
+    //display the final grid
+    //System.out.println(checkSea(grid, SL));
     return cVol(grid, SL);
   }
 
   //at the very end show land and elevation in respect to sea level
-  private static String checkSea(int[][] g, int E) {
+  /*private static String checkSea(int[][] g, int E) {
     String out = "";
     for (int i = 0; i < g.length; i++) {
       for (int j = 0; j < g[0].length; j++) {
@@ -39,7 +44,7 @@ public class USACO{
     }
     return out;
   }
-  //basically a tostring: show each input pass
+  /*basically a tostring: show each input pass
   private static String showPass(int[][] g) {
     String out = "";
     for (int i = 0; i < g.length; i++) {
@@ -50,7 +55,7 @@ public class USACO{
     }
     return out;
   }
-
+  */
   private static void stomp(int r, int c, int d, int[][] g) {
     int UL = g[r][c];
     for (int i = r-1; i < r+2; i++) {
@@ -65,7 +70,7 @@ public class USACO{
       }
     }
   }
-
+  //calculatues volume in cubic inches
   private static int cVol(int[][] g, int E) {
     int agDepth = 0;
     for (int i = 0; i < g.length; i++) {
@@ -85,12 +90,12 @@ public class USACO{
     try {
       //System.out.println(bronze("makeLake/makeLake.1.in"));
       int ans = 0;
-      File f = new File("makeLake/makeLake.1.out");
+      File f = new File("makeLake/makeLake.5.out");
       Scanner i = new Scanner(f);
       ans = Integer.parseInt(i.nextLine());
       //System.out.println(ans);
-      if (bronze("makeLake/makeLake.1.in") == ans) {
-        System.out.println("Success! Go try the others");
+      if (bronze("makeLake/makeLake.5.in") == ans) {
+        System.out.println("Success! Go try the others \n" + ans);
       }
       else System.out.println("failure :/");
     }catch (FileNotFoundException e) {
