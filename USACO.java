@@ -33,34 +33,23 @@ public class USACO{
       for (int j = 0; j < g[0].length; j++) {
         /*if (g[i][j] >= E) out += "__" + " ";
         else out += " " + Math.abs(E - g[i][j]) + " ";*/
-        out += g[i][j] + " ";;
+        out += g[i][j] + " ";
       }
       out += '\n';
     }
     return out;
   }
   private static void stomp(int r, int c, int d, int[][] g) {
-    int max = 0;
-    int target = 0;
-    ArrayList<Integer> e = new ArrayList<>();
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        int nR = r + i;
-        int nC = c + i;
-        if (nR < g.length && nC < g[0].length) {
-          e.add(g[nR][nC]);
-        }
+    int UL = g[r][c];
+    for (int i = r-1; i < r+2; i++) {
+      for (int j = c-1; j < c+2; j++) {
+        UL = Math.max(UL, g[i][j]); //find the max elevation in the set of 3 by 3;
       }
     }
-    target = Collections.max(e) - d;
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        int nR = r + i;
-        int nC = c + i;
-        if (nR < g.length && nC < g[0].length) {
-        g[nR][nC] = Math.min(g[nR][nC], target);
-        //go to the nearest low... or target
-      }
+    int target = UL - d;
+    for (int i = r-1; i < r+2; i++) {
+      for (int j = c-1; j < c+2; j++) {
+        g[i][j] = Math.min(g[i][j], target); //go down to nearest elevation allowed or stomp to target elevation if avail.
       }
     }
   }
