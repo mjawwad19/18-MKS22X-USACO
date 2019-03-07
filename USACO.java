@@ -82,14 +82,39 @@ public class USACO{
     return agDepth * 72 * 72;
   }
 
-  public static int silver(String fileName) {
+  public static int silver(String fileName) throws FileNotFoundException {
+    File txt = new File(fileName);
+    Scanner inf = new Scanner(txt);
+    String[] l = inf.nextLine().split(" ");
+    int R = Integer.parseInt(l[0]);
+    int C = Integer.parseInt(l[1]);
+    int T = Integer.parseInt(l[2]);
+    String[][] land = new String[R][C];
+    //convert inputted grid to a string[][] array to be used
+    for (int r = 0; r < R; r++) {
+      String[] row = inf.nextLine().split("");
+      for (int c = 0; c < C; c++) {
+        land[r][c] = row[c];
+      }
+    }
+    System.out.println(sPrint(land));
     return -1;
   }
 
+  private static String sPrint(String[][] l) {
+    String out = "";
+    for (int r = 0; r < l.length; r++) {
+      for (int c = 0; c < l[0].length; c++) {
+        out += l[r][c] + " ";
+      }
+      out += "\n";
+    }
+    return out;
+  }
   public static void main(String[] args) {
     try {
       //System.out.println(bronze("makeLake/makeLake.1.in"));
-      int ans = 0;
+      /*int ans = 0;
       File f = new File("makeLake/makeLake.5.out");
       Scanner i = new Scanner(f);
       ans = Integer.parseInt(i.nextLine());
@@ -97,7 +122,9 @@ public class USACO{
       if (bronze("makeLake/makeLake.5.in") == ans) {
         System.out.println("Success! Go try the others \n" + ans);
       }
-      else System.out.println("failure :/");
+      else System.out.println("failure :/");*/
+
+      silver("ctravel/ctravel.1.in"); //currently just display the board;
     }catch (FileNotFoundException e) {
       System.out.println("enter a file known");
     }
