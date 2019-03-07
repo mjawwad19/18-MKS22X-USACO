@@ -24,15 +24,16 @@ public class USACO{
       System.out.println(showPass(grid));
     }
     System.out.println(checkSea(grid, SL));
-    return -1;
+    return cVol(grid, SL);
   }
+
   //at the very end show land and elevation in respect to sea level
   private static String checkSea(int[][] g, int E) {
     String out = "";
     for (int i = 0; i < g.length; i++) {
       for (int j = 0; j < g[0].length; j++) {
         if (g[i][j] >= E) out += "__" + " ";
-        else out += " " + Math.abs(E - g[i][j]) + " ";
+        else out += " " + (E - g[i][j]) + " ";
       }
       out += '\n';
     }
@@ -65,13 +66,33 @@ public class USACO{
     }
   }
 
+  private static int cVol(int[][] g, int E) {
+    int agDepth = 0;
+    for (int i = 0; i < g.length; i++) {
+      for (int j = 0; j < g[0].length; j++) {
+        if (g[i][j] < E) agDepth += E - g[i][j];
+      }
+    }
+    //System.out.println("agDepth = " + agDepth);
+    return agDepth * 72 * 72;
+  }
+
   public static int silver(String fileName) {
     return -1;
   }
 
   public static void main(String[] args) {
     try {
-      bronze("makeLake/makeLake.1.in");
+      //System.out.println(bronze("makeLake/makeLake.1.in"));
+      int ans = 0;
+      File f = new File("makeLake/makeLake.1.out");
+      Scanner i = new Scanner(f);
+      ans = Integer.parseInt(i.nextLine());
+      //System.out.println(ans);
+      if (bronze("makeLake/makeLake.1.in") == ans) {
+        System.out.println("Success! Go try the others");
+      }
+      else System.out.println("failure :/");
     }catch (FileNotFoundException e) {
       System.out.println("enter a file known");
     }
