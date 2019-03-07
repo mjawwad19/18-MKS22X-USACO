@@ -21,24 +21,35 @@ public class USACO{
     for (int i = 0; i < N; i++) { //aka N stomp instructions
       String[] cInp = inf.nextLine().split(" "); //take every input
       stomp(Integer.parseInt(cInp[0]), Integer.parseInt(cInp[1]), Integer.parseInt(cInp[2]), grid); //stomp that current section...
-      System.out.println(checkSea(grid, SL));
+      System.out.println(showPass(grid));
     }
-    //System.out.println(checkSea(grid, Integer.parseInt(lvls[2]))); //lvl[2] is E
+    System.out.println(checkSea(grid, SL));
     return -1;
   }
-
+  //at the very end show land and elevation in respect to sea level
   private static String checkSea(int[][] g, int E) {
     String out = "";
     for (int i = 0; i < g.length; i++) {
       for (int j = 0; j < g[0].length; j++) {
-        /*if (g[i][j] >= E) out += "__" + " ";
-        else out += " " + Math.abs(E - g[i][j]) + " ";*/
-        out += g[i][j] + " ";
+        if (g[i][j] >= E) out += "__" + " ";
+        else out += " " + Math.abs(E - g[i][j]) + " ";
       }
       out += '\n';
     }
     return out;
   }
+  //basically a tostring: show each input pass
+  private static String showPass(int[][] g) {
+    String out = "";
+    for (int i = 0; i < g.length; i++) {
+      for (int j = 0; j < g[0].length; j++) {
+        out += g[i][j] + " ";
+      }
+      out += "\n";
+    }
+    return out;
+  }
+
   private static void stomp(int r, int c, int d, int[][] g) {
     int UL = g[r][c];
     for (int i = r-1; i < r+2; i++) {
