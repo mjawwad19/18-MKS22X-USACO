@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 public class USACO{
+
   public static int bronze(String fileName) throws FileNotFoundException{
     File text = new File(fileName);
     Scanner inf = new Scanner(text);
@@ -80,12 +81,12 @@ public class USACO{
     int C2 = Integer.parseInt(iP[3]) - 1;
     for (int t = 0; t < T; t++) {
       land = move(land);
-      System.out.println(sPrint(land));
+      //System.out.println(sPrint(land));
     }
     return land[R2][C2];
   }
 
-  private static String sPrint(int[][] l) {
+  /*private static String sPrint(int[][] l) {
     String out = "";
     for (int r = 0; r < l.length; r++) {
       for (int c = 0; c < l[0].length; c++) {
@@ -94,12 +95,13 @@ public class USACO{
       out += "\n";
     }
     return out;
-  }
+  }*/
+
   private static boolean runOff(int r, int c, int[][] l) {
     return (r< 0 || c < 0 ||
             r >= l.length || c >= l[0].length);
-
   }
+
   private static int[][] move(int[][] l) {
     int[] moves = {1, 0, 0, 1, -1, 0, 0, -1}; //up right down left
     int[][] possMoves = new int[l.length][l[0].length];
@@ -122,6 +124,7 @@ public class USACO{
     }
     return possMoves;
   }
+
   public static void main(String[] args) {
     try {
       //System.out.println(bronze("makeLake/makeLake.1.in"));
