@@ -23,39 +23,11 @@ public class USACO{
     //stomp N times
     for (int i = 0; i < N; i++) { //aka N stomp instructions
       String[] cInp = inf.nextLine().split(" "); //take every input
-      stomp(Integer.parseInt(cInp[0]), Integer.parseInt(cInp[1]), Integer.parseInt(cInp[2]), grid); //stomp that current section...
-      //System.out.println(showPass(grid));
+      stomp(Integer.parseInt(cInp[0]), Integer.parseInt(cInp[1]), Integer.parseInt(cInp[2]), grid);
     }
-
-    //display the final grid
-    //System.out.println(checkSea(grid, SL));
     return cVol(grid, SL);
   }
 
-  //at the very end show land and elevation in respect to sea level
-  /*private static String checkSea(int[][] g, int E) {
-    String out = "";
-    for (int i = 0; i < g.length; i++) {
-      for (int j = 0; j < g[0].length; j++) {
-        if (g[i][j] >= E) out += "__" + " ";
-        else out += " " + (E - g[i][j]) + " ";
-      }
-      out += '\n';
-    }
-    return out;
-  }
-  /*basically a tostring: show each input pass
-  private static String showPass(int[][] g) {
-    String out = "";
-    for (int i = 0; i < g.length; i++) {
-      for (int j = 0; j < g[0].length; j++) {
-        out += g[i][j] + " ";
-      }
-      out += "\n";
-    }
-    return out;
-  }
-  */
   private static void stomp(int r, int c, int d, int[][] g) {
     int UL = g[r][c];
     for (int i = r-1; i < r+2; i++) {
@@ -90,24 +62,27 @@ public class USACO{
     int C = Integer.parseInt(l[1]);
     int T = Integer.parseInt(l[2]);
     int[][] land = new int[R][C];
+
     //convert inputted grid to a string[][] array to be used
     for (int r = 0; r < R; r++) {
       String[] row = inf.nextLine().split("");
       for (int c = 0; c < C; c++) {
-        System.out.println(Arrays.toString(row));
         if (row[c].equals(".")) land[r][c] = 0;
         else land[r][c] = -1;
       }
     }
-    System.out.println(sPrint(land));
+
     String[] iP = inf.nextLine().split(" "); //the locations!
-    int R1 = Integer.parseInt(iP[0]);
-    int C1 = Integer.parseInt(iP[1]);
-    int R2 = Integer.parseInt(iP[2]);
-    int C2 = Integer.parseInt(iP[2]);
-    int[] moves = {1, 0, 0, 1, -1, 0, 0, -1}; //up right down left
-    int[][] possMoves;
-    return -1;
+    int R1 = Integer.parseInt(iP[0]) -1;
+    int C1 = Integer.parseInt(iP[1]) - 1;
+    land[R1][C1] = 1;
+    int R2 = Integer.parseInt(iP[2]) - 1;
+    int C2 = Integer.parseInt(iP[3]) - 1;
+    for (int t = 0; t < T; t++) {
+      land = move(land);
+      System.out.println(sPrint(land));
+    }
+    return land[R2][C2];
   }
 
   private static String sPrint(int[][] l) {
@@ -119,6 +94,33 @@ public class USACO{
       out += "\n";
     }
     return out;
+  }
+  private static boolean runOff(int r, int c, int[][] l) {
+    return (r< 0 || c < 0 ||
+            r >= l.length || c >= l[0].length);
+
+  }
+  private static int[][] move(int[][] l) {
+    int[] moves = {1, 0, 0, 1, -1, 0, 0, -1}; //up right down left
+    int[][] possMoves = new int[l.length][l[0].length];
+    for (int i = 0; i < possMoves.length; i++) {
+      for (int j = 0; j < possMoves[0].length; j++) {
+        if (l[i][j] == -1) possMoves[i][j] = -1;
+        else {
+          int currMP = 0;
+          for (int m = 0; m < 8; m+=2) {
+            int nR = i + moves[m];
+            int nC = j + moves[m+1];
+            if (!runOff(nR, nC, l) && l[nR][nC] != -1) {
+              currMP += l[nR][nC]; //this is all the same optimization stuff from Knights as suggested by K
+            }
+          }
+          possMoves[i][j] = currMP;
+          //System.out.println(currMP);
+        }
+      }
+    }
+    return possMoves;
   }
   public static void main(String[] args) {
     try {
@@ -133,7 +135,7 @@ public class USACO{
       }
       else System.out.println("failure :/");*/
 
-      silver("ctravel/ctravel.1.in"); //currently just display the board;
+      System.out.println(silver("ctravel/ctravel.5.in"));
     }catch (FileNotFoundException e) {
       System.out.println("enter a file known");
     }
